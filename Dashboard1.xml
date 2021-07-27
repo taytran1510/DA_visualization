@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="en-US">
+  <Title Text="Dashboard" />
+  <DataSources>
+    <SqlDataSource Name="SQL Data Source 1" ComponentName="dashboardSqlDataSource1">
+      <Connection Name="localhost_FAOSTAT_DWH_Connection" ProviderKey="MSSqlServer">
+        <Parameters>
+          <Parameter Name="server" Value="TAY\MSSQLSERVER01" />
+          <Parameter Name="database" Value="FAOSTAT_DWH" />
+          <Parameter Name="useIntegratedSecurity" Value="True" />
+          <Parameter Name="read only" Value="1" />
+          <Parameter Name="generateConnectionHelper" Value="false" />
+          <Parameter Name="userid" Value="" />
+          <Parameter Name="password" Value="" />
+        </Parameters>
+      </Connection>
+      <Query Type="SelectQuery" Name="FactThongKe">
+        <Tables>
+          <Table Name="FactThongKe" X="30" Y="30" Width="125" Height="225" />
+        </Tables>
+        <Columns>
+          <Column Table="FactThongKe" Name="MaTPLN" />
+          <Column Table="FactThongKe" Name="MaLV" />
+          <Column Table="FactThongKe" Name="MaNam" />
+          <Column Table="FactThongKe" Name="MaNguon" />
+          <Column Table="FactThongKe" Name="MaNhom" />
+          <Column Table="FactThongKe" Name="MaQG" />
+          <Column Table="FactThongKe" Name="TongGiaTriNhapKhau" />
+          <Column Table="FactThongKe" Name="TongGiaTriXuatKhau" />
+        </Columns>
+      </Query>
+      <Query Type="SelectQuery" Name="DimNhomNuoc">
+        <Tables>
+          <Table Name="DimNhomNuoc" X="30" Y="30" Width="125" Height="105" />
+        </Tables>
+        <Columns>
+          <Column Table="DimNhomNuoc" Name="MaNhom" />
+          <Column Table="DimNhomNuoc" Name="TenNhom" />
+        </Columns>
+      </Query>
+      <Query Type="SelectQuery" Name="DimQuocGia">
+        <Tables>
+          <Table Name="DimQuocGia" X="30" Y="30" Width="125" Height="205" />
+        </Tables>
+        <Columns>
+          <Column Table="DimQuocGia" Name="MaQG" />
+          <Column Table="DimQuocGia" Name="TenQG" />
+          <Column Table="DimQuocGia" Name="m49_code" />
+          <Column Table="DimQuocGia" Name="iso2_code" />
+          <Column Table="DimQuocGia" Name="iso3_code" />
+          <Column Table="DimQuocGia" Name="start_year" />
+          <Column Table="DimQuocGia" Name="end_year" />
+        </Columns>
+      </Query>
+      <Query Type="SelectQuery" Name="DimThoiGian">
+        <Tables>
+          <Table Name="DimThoiGian" X="30" Y="30" Width="125" Height="105" />
+        </Tables>
+        <Columns>
+          <Column Table="DimThoiGian" Name="MaNam" />
+          <Column Table="DimThoiGian" Name="Nam" />
+        </Columns>
+      </Query>
+      <ResultSchema>
+        <DataSet Name="SQL Data Source 1">
+          <View Name="FactThongKe">
+            <Field Name="MaTPLN" Type="Int32" />
+            <Field Name="MaLV" Type="String" />
+            <Field Name="MaNam" Type="Int32" />
+            <Field Name="MaNguon" Type="String" />
+            <Field Name="MaNhom" Type="Int32" />
+            <Field Name="MaQG" Type="Int32" />
+            <Field Name="TongGiaTriNhapKhau" Type="Decimal" />
+            <Field Name="TongGiaTriXuatKhau" Type="Decimal" />
+          </View>
+          <View Name="DimNhomNuoc">
+            <Field Name="MaNhom" Type="Int32" />
+            <Field Name="TenNhom" Type="String" />
+          </View>
+          <View Name="DimQuocGia">
+            <Field Name="MaQG" Type="Int32" />
+            <Field Name="TenQG" Type="String" />
+            <Field Name="m49_code" Type="String" />
+            <Field Name="iso2_code" Type="String" />
+            <Field Name="iso3_code" Type="String" />
+            <Field Name="start_year" Type="Int32" />
+            <Field Name="end_year" Type="Int32" />
+          </View>
+          <View Name="DimThoiGian">
+            <Field Name="MaNam" Type="Int32" />
+            <Field Name="Nam" Type="Int32" />
+          </View>
+        </DataSet>
+      </ResultSchema>
+      <ConnectionOptions CloseConnection="true" />
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <Chart ComponentName="chartDashboardItem1" Name="Import and Export Value in the World" DataSource="dashboardSqlDataSource1" DataMember="FactThongKe">
+      <DataItems>
+        <Measure DataMember="TongGiaTriNhapKhau" DefaultId="DataItem0" />
+        <Dimension DataMember="MaNam" DefaultId="DataItem1" />
+        <Measure DataMember="TongGiaTriXuatKhau" DefaultId="DataItem2" />
+      </DataItems>
+      <Arguments>
+        <Argument DefaultId="DataItem1" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <Series>
+            <Simple>
+              <Value DefaultId="DataItem0" />
+            </Simple>
+            <Simple>
+              <Value DefaultId="DataItem2" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Chart ComponentName="chartDashboardItem2" Name="Chart 1" DataSource="dashboardSqlDataSource1" DataMember="FactThongKe">
+      <DataItems>
+        <Dimension DataMember="MaNam" DefaultId="DataItem1" />
+        <Dimension DataMember="MaNhom" DefaultId="DataItem2" />
+        <Measure DataMember="TongGiaTriNhapKhau" DefaultId="DataItem0" />
+      </DataItems>
+      <SeriesDimensions>
+        <SeriesDimension DefaultId="DataItem2" />
+      </SeriesDimensions>
+      <Arguments>
+        <Argument DefaultId="DataItem1" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <Series>
+            <Simple SeriesType="StackedLine">
+              <Value DefaultId="DataItem0" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Grid ComponentName="gridDashboardItem1" Name="Grid 1" DataSource="dashboardSqlDataSource1" DataMember="FactThongKe">
+      <DataItems>
+        <Measure DataMember="TongGiaTriNhapKhau" DefaultId="DataItem1" />
+        <Dimension DataMember="MaNam" TopNCount="10" DefaultId="DataItem0" />
+        <Measure DataMember="MaQG" DefaultId="DataItem2" />
+      </DataItems>
+      <FormatRules>
+        <GridItemFormatRule Name="FormatRule 1" DataItem="DataItem1" DataItemApplyTo="DataItem1">
+          <FormatConditionRangeGradient ValueType="Percent">
+            <RangeSet>
+              <Ranges>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="0" />
+                  <AppearanceSettings AppearanceType="GradientYellow" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="10" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="20" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="30" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="40" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="50" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="60" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="70" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="80" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="90" />
+                  <AppearanceSettings AppearanceType="GradientGreen" />
+                </RangeInfo>
+              </Ranges>
+            </RangeSet>
+          </FormatConditionRangeGradient>
+        </GridItemFormatRule>
+      </FormatRules>
+      <GridColumns>
+        <GridDimensionColumn>
+          <Dimension DefaultId="DataItem0" />
+        </GridDimensionColumn>
+        <GridMeasureColumn>
+          <Measure DefaultId="DataItem2" />
+        </GridMeasureColumn>
+        <GridMeasureColumn>
+          <Measure DefaultId="DataItem1" />
+        </GridMeasureColumn>
+      </GridColumns>
+      <GridOptions />
+    </Grid>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup>
+      <LayoutGroup Orientation="Vertical" Weight="0.0625">
+        <LayoutItem DashboardItem="chartDashboardItem1" Weight="0.0625" />
+        <LayoutItem DashboardItem="gridDashboardItem1" Weight="0.0625" />
+      </LayoutGroup>
+      <LayoutItem DashboardItem="chartDashboardItem2" Weight="0.0625" />
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>

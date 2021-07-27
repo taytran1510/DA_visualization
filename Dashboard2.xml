@@ -1,0 +1,455 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="en-US">
+  <Title Text="Dashboard" />
+  <DataSources>
+    <SqlDataSource Name="SQL Data Source 1" ComponentName="dashboardSqlDataSource1">
+      <Connection Name="localhost_FAOSTAT_DWH_Connection" ProviderKey="MSSqlServer">
+        <Parameters>
+          <Parameter Name="server" Value="TAY\MSSQLSERVER01" />
+          <Parameter Name="database" Value="FAOSTAT_DWH" />
+          <Parameter Name="useIntegratedSecurity" Value="True" />
+          <Parameter Name="read only" Value="1" />
+          <Parameter Name="generateConnectionHelper" Value="false" />
+          <Parameter Name="userid" Value="" />
+          <Parameter Name="password" Value="" />
+        </Parameters>
+      </Connection>
+      <Query Type="SelectQuery" Name="FactThongKe">
+        <Tables>
+          <Table Name="FactThongKe" X="30" Y="30" Width="125" Height="225" />
+          <Table Name="DimThoiGian" X="185" Y="30" Width="125" Height="105" />
+          <Table Name="DimQuocGia" X="340" Y="30" Width="125" Height="205" />
+          <Relation Type="Inner" Parent="FactThongKe" Nested="DimThoiGian">
+            <KeyColumn Parent="MaNam" Nested="MaNam" />
+          </Relation>
+          <Relation Type="Inner" Parent="FactThongKe" Nested="DimQuocGia">
+            <KeyColumn Parent="MaQG" Nested="MaQG" />
+          </Relation>
+        </Tables>
+        <Columns>
+          <Column Table="DimThoiGian" Name="Nam" />
+          <Column Table="DimQuocGia" Name="TenQG" />
+          <Column Table="FactThongKe" Name="TongGiaTriNhapKhau" Aggregate="Sum" Alias="Sum_TongGiaTriNhapKhau" />
+        </Columns>
+        <Grouping>
+          <Column Table="DimQuocGia" Name="TenQG" />
+          <Column Table="DimThoiGian" Name="Nam" />
+        </Grouping>
+        <Filter>[DimThoiGian.Nam] = 2019</Filter>
+        <GroupFilter></GroupFilter>
+      </Query>
+      <Query Type="SelectQuery" Name="FactThongKe_1">
+        <Tables>
+          <Table Name="FactThongKe" X="30" Y="30" Width="125" Height="225" />
+          <Table Name="DimThoiGian" X="185" Y="30" Width="125" Height="105" />
+          <Relation Type="Inner" Parent="FactThongKe" Nested="DimThoiGian">
+            <KeyColumn Parent="MaNam" Nested="MaNam" />
+          </Relation>
+        </Tables>
+        <Columns>
+          <Column Table="DimThoiGian" Name="Nam" />
+          <Column Table="FactThongKe" Name="TongGiaTriNhapKhau" Aggregate="Sum" Alias="Sum_TongGiaTriNhapKhau" />
+          <Column Table="FactThongKe" Name="TongGiaTriXuatKhau" Aggregate="Sum" Alias="Sum_TongGiaTriXuatKhau" />
+        </Columns>
+        <Grouping>
+          <Column Table="DimThoiGian" Name="Nam" />
+        </Grouping>
+      </Query>
+      <Query Type="SelectQuery" Name="FactThongKe_2">
+        <Tables>
+          <Table Name="FactThongKe" X="30" Y="30" Width="125" Height="225" />
+          <Table Name="DimNhomNuoc" X="340" Y="30" Width="125" Height="105" />
+          <Relation Type="Inner" Parent="FactThongKe" Nested="DimNhomNuoc">
+            <KeyColumn Parent="MaNhom" Nested="MaNhom" />
+          </Relation>
+        </Tables>
+        <Columns>
+          <Column Table="DimNhomNuoc" Name="TenNhom" />
+          <Column Table="FactThongKe" Name="TongGiaTriNhapKhau" Aggregate="Avg" Alias="Avg_TongGiaTriNhapKhau" />
+          <Column Table="FactThongKe" Name="TongGiaTriXuatKhau" Aggregate="Avg" Alias="Avg_TongGiaTriXuatKhau" />
+        </Columns>
+        <Grouping>
+          <Column Table="DimNhomNuoc" Name="TenNhom" />
+        </Grouping>
+      </Query>
+      <Query Type="SelectQuery" Name="FactThongKe_3">
+        <Tables>
+          <Table Name="FactThongKe" X="30" Y="30" Width="125" Height="225" />
+          <Table Name="DimQuocGia" X="185" Y="30" Width="125" Height="205" />
+          <Relation Type="Inner" Parent="FactThongKe" Nested="DimQuocGia">
+            <KeyColumn Parent="MaQG" Nested="MaQG" />
+          </Relation>
+        </Tables>
+        <Columns>
+          <Column Table="DimQuocGia" Name="TenQG" />
+          <Column Table="FactThongKe" Name="TongGiaTriNhapKhau" Aggregate="Sum" Alias="Sum_TongGiaTriNhapKhau" />
+          <Column Table="FactThongKe" Name="TongGiaTriXuatKhau" Aggregate="Sum" Alias="Sum_TongGiaTriXuatKhau" />
+        </Columns>
+        <Grouping>
+          <Column Table="DimQuocGia" Name="TenQG" />
+        </Grouping>
+      </Query>
+      <Query Type="SelectQuery" Name="FactThongKe_4">
+        <Tables>
+          <Table Name="FactThongKe" X="30" Y="30" Width="125" Height="225" />
+          <Table Name="DimThoiGian" X="185" Y="30" Width="125" Height="105" />
+          <Table Name="DimQuocGia" X="340" Y="30" Width="125" Height="205" />
+          <Relation Type="Inner" Parent="FactThongKe" Nested="DimThoiGian">
+            <KeyColumn Parent="MaNam" Nested="MaNam" />
+          </Relation>
+          <Relation Type="Inner" Parent="FactThongKe" Nested="DimQuocGia">
+            <KeyColumn Parent="MaQG" Nested="MaQG" />
+          </Relation>
+        </Tables>
+        <Columns>
+          <Column Table="DimThoiGian" Name="Nam" />
+          <Column Table="DimQuocGia" Name="TenQG" />
+          <Column Table="FactThongKe" Name="TongGiaTriNhapKhau" Aggregate="Sum" Alias="Sum_TongGiaTriNhapKhau" />
+          <Column Table="FactThongKe" Name="TongGiaTriXuatKhau" Aggregate="Sum" Alias="Sum_TongGiaTriXuatKhau" />
+        </Columns>
+        <Grouping>
+          <Column Table="DimThoiGian" Name="Nam" />
+          <Column Table="DimQuocGia" Name="TenQG" />
+        </Grouping>
+        <Filter></Filter>
+        <GroupFilter>StartsWith([TenQG], 'Australia')</GroupFilter>
+      </Query>
+      <Query Type="SelectQuery" Name="FactThongKe_5">
+        <Tables>
+          <Table Name="FactThongKe" X="30" Y="30" Width="125" Height="225" />
+          <Table Name="DimNhomNuoc" X="185" Y="30" Width="125" Height="105" />
+          <Relation Type="Inner" Parent="FactThongKe" Nested="DimNhomNuoc">
+            <KeyColumn Parent="MaNhom" Nested="MaNhom" />
+          </Relation>
+        </Tables>
+        <Columns>
+          <Column Table="DimNhomNuoc" Name="TenNhom" />
+          <Column Table="FactThongKe" Name="TongGiaTriNhapKhau" Aggregate="Sum" Alias="Sum_TongGiaTriNhapKhau" />
+          <Column Table="FactThongKe" Name="TongGiaTriXuatKhau" Aggregate="Sum" Alias="Sum_TongGiaTriXuatKhau" />
+        </Columns>
+        <Grouping>
+          <Column Table="DimNhomNuoc" Name="TenNhom" />
+        </Grouping>
+      </Query>
+      <ResultSchema>
+        <DataSet Name="SQL Data Source 1">
+          <View Name="FactThongKe">
+            <Field Name="Nam" Type="Int32" />
+            <Field Name="TenQG" Type="String" />
+            <Field Name="Sum_TongGiaTriNhapKhau" Type="Decimal" />
+          </View>
+          <View Name="FactThongKe_1">
+            <Field Name="Nam" Type="Int32" />
+            <Field Name="Sum_TongGiaTriNhapKhau" Type="Decimal" />
+            <Field Name="Sum_TongGiaTriXuatKhau" Type="Decimal" />
+          </View>
+          <View Name="FactThongKe_2">
+            <Field Name="TenNhom" Type="String" />
+            <Field Name="Avg_TongGiaTriNhapKhau" Type="Decimal" />
+            <Field Name="Avg_TongGiaTriXuatKhau" Type="Decimal" />
+          </View>
+          <View Name="FactThongKe_3">
+            <Field Name="TenQG" Type="String" />
+            <Field Name="Sum_TongGiaTriNhapKhau" Type="Decimal" />
+            <Field Name="Sum_TongGiaTriXuatKhau" Type="Decimal" />
+          </View>
+          <View Name="FactThongKe_4">
+            <Field Name="Nam" Type="Int32" />
+            <Field Name="TenQG" Type="String" />
+            <Field Name="Sum_TongGiaTriNhapKhau" Type="Decimal" />
+            <Field Name="Sum_TongGiaTriXuatKhau" Type="Decimal" />
+          </View>
+          <View Name="FactThongKe_5">
+            <Field Name="TenNhom" Type="String" />
+            <Field Name="Sum_TongGiaTriNhapKhau" Type="Decimal" />
+            <Field Name="Sum_TongGiaTriXuatKhau" Type="Decimal" />
+          </View>
+        </DataSet>
+      </ResultSchema>
+      <ConnectionOptions CloseConnection="true" />
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <Chart ComponentName="chartDashboardItem1" Name="Tổng value nhập khẩu lâm nghiệp của các nước trên thế giới năm 2019" DataSource="dashboardSqlDataSource1" DataMember="FactThongKe">
+      <DataItems>
+        <Measure DataMember="Sum_TongGiaTriNhapKhau" DefaultId="DataItem0" />
+        <Dimension DataMember="TenQG" DefaultId="DataItem1" />
+        <Dimension DataMember="Nam" DefaultId="DataItem2" />
+      </DataItems>
+      <SeriesDimensions>
+        <SeriesDimension DefaultId="DataItem2" />
+      </SeriesDimensions>
+      <Arguments>
+        <Argument DefaultId="DataItem1" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <Series>
+            <Simple>
+              <Value DefaultId="DataItem0" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Chart ComponentName="chartDashboardItem2" Name="Tổng vale xuất nhập khẩu lâm nghiệp của thế giới từ năm 2000 đến 2019" DataSource="dashboardSqlDataSource1" DataMember="FactThongKe_1">
+      <DataItems>
+        <Measure DataMember="Sum_TongGiaTriNhapKhau" DefaultId="DataItem0" />
+        <Measure DataMember="Sum_TongGiaTriXuatKhau" DefaultId="DataItem1" />
+        <Dimension DataMember="Nam" DefaultId="DataItem2" />
+      </DataItems>
+      <Arguments>
+        <Argument DefaultId="DataItem2" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <Series>
+            <Simple Name="Tổng value nhập khẩu" ShowPointMarkers="true" SeriesType="Line">
+              <Value DefaultId="DataItem0" />
+            </Simple>
+            <Simple Name="Tổng value xuất khẩu" ShowPointMarkers="true" SeriesType="Line">
+              <Value DefaultId="DataItem1" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Chart ComponentName="chartDashboardItem3" Name="Bình quân value nhập khẩu của các nhóm nước trên thế giới" DataSource="dashboardSqlDataSource1" DataMember="FactThongKe_2">
+      <DataItems>
+        <Measure DataMember="Avg_TongGiaTriNhapKhau" DefaultId="DataItem0" />
+        <Dimension DataMember="TenNhom" TopNEnabled="true" TopNCount="10" TopNMeasure="DataItem0" DefaultId="DataItem2" />
+      </DataItems>
+      <Arguments>
+        <Argument DefaultId="DataItem2" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <Series>
+            <Simple Name="Bình quân value nhập khẩu">
+              <Value DefaultId="DataItem0" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Chart ComponentName="chartDashboardItem4" Name="Tổng value xuất nhập khẩu của nước Úc từ năm 2000-2019" DataSource="dashboardSqlDataSource1" DataMember="FactThongKe_4">
+      <DataItems>
+        <Measure DataMember="Sum_TongGiaTriNhapKhau" DefaultId="DataItem0" />
+        <Measure DataMember="Sum_TongGiaTriXuatKhau" DefaultId="DataItem1" />
+        <Dimension DataMember="TenQG" DefaultId="DataItem2" />
+        <Dimension DataMember="Nam" DefaultId="DataItem3" />
+      </DataItems>
+      <SeriesDimensions>
+        <SeriesDimension DefaultId="DataItem2" />
+      </SeriesDimensions>
+      <Arguments>
+        <Argument DefaultId="DataItem3" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <Series>
+            <Simple Name="Tổng value nhập khẩu">
+              <Value DefaultId="DataItem0" />
+            </Simple>
+            <Simple Name="Tổng value xuất khẩu">
+              <Value DefaultId="DataItem1" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Grid ComponentName="gridDashboardItem1" Name="Tổng giá trị nhập khẩu lâm nghiệp của các nhóm nước trên thế giới" DataSource="dashboardSqlDataSource1" DataMember="FactThongKe_5">
+      <DataItems>
+        <Dimension DataMember="TenNhom" DefaultId="DataItem0" />
+        <Measure DataMember="Sum_TongGiaTriNhapKhau" DefaultId="DataItem1" />
+      </DataItems>
+      <FormatRules>
+        <GridItemFormatRule Name="FormatRule 1" DataItem="DataItem1" DataItemApplyTo="DataItem1">
+          <FormatConditionRangeGradient ValueType="Percent">
+            <RangeSet>
+              <Ranges>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="0" />
+                  <AppearanceSettings AppearanceType="GradientYellow" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="10" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="20" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="30" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="40" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="50" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="60" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="70" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="80" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="90" />
+                  <AppearanceSettings AppearanceType="GradientGreen" />
+                </RangeInfo>
+              </Ranges>
+            </RangeSet>
+          </FormatConditionRangeGradient>
+        </GridItemFormatRule>
+        <GridItemFormatRule Name="FormatRule 2" DataItem="DataItem1" DataItemApplyTo="DataItem1">
+          <FormatConditionRangeGradient ValueType="Percent">
+            <RangeSet>
+              <Ranges>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="0" />
+                  <AppearanceSettings AppearanceType="GradientGreen" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="10" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="20" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="30" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="40" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="50" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="60" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="70" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="80" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="90" />
+                  <AppearanceSettings AppearanceType="GradientTransparent" />
+                </RangeInfo>
+              </Ranges>
+            </RangeSet>
+          </FormatConditionRangeGradient>
+        </GridItemFormatRule>
+        <GridItemFormatRule Name="FormatRule 3" DataItem="DataItem1" DataItemApplyTo="DataItem1">
+          <FormatConditionRangeGradient ValueType="Percent">
+            <RangeSet>
+              <Ranges>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="0" />
+                  <AppearanceSettings AppearanceType="GradientGreen" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="10" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="20" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="30" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="40" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="50" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="60" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="70" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="80" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="90" />
+                  <AppearanceSettings AppearanceType="GradientTransparent" />
+                </RangeInfo>
+              </Ranges>
+            </RangeSet>
+          </FormatConditionRangeGradient>
+        </GridItemFormatRule>
+        <GridItemFormatRule Name="FormatRule 4" DataItem="DataItem1" DataItemApplyTo="DataItem1">
+          <FormatConditionRangeGradient ValueType="Percent">
+            <RangeSet>
+              <Ranges>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="0" />
+                  <AppearanceSettings AppearanceType="GradientGreen" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="10" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="20" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="30" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="40" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="50" />
+                  <AppearanceSettings AppearanceType="GradientTransparent" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="60" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="70" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="80" />
+                </RangeInfo>
+                <RangeInfo>
+                  <Value Type="System.Double" Value="90" />
+                  <AppearanceSettings AppearanceType="GradientBlue" />
+                </RangeInfo>
+              </Ranges>
+            </RangeSet>
+          </FormatConditionRangeGradient>
+        </GridItemFormatRule>
+      </FormatRules>
+      <GridColumns>
+        <GridDimensionColumn Name="Tên nhóm">
+          <Dimension DefaultId="DataItem0" />
+        </GridDimensionColumn>
+        <GridMeasureColumn Name="Tổng value nhập khẩu">
+          <Measure DefaultId="DataItem1" />
+        </GridMeasureColumn>
+      </GridColumns>
+      <GridOptions />
+    </Grid>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup Orientation="Vertical" Weight="100">
+      <LayoutGroup Weight="55.426356589147289">
+        <LayoutItem DashboardItem="chartDashboardItem1" Weight="39.513888888888886" />
+        <LayoutGroup Orientation="Vertical" Weight="60.486111111111114">
+          <LayoutItem DashboardItem="chartDashboardItem2" Weight="55.710955710955709" />
+          <LayoutItem DashboardItem="gridDashboardItem1" Weight="44.289044289044291" />
+        </LayoutGroup>
+      </LayoutGroup>
+      <LayoutGroup Weight="44.573643410852711">
+        <LayoutItem DashboardItem="chartDashboardItem3" Weight="39.513888888888886" />
+        <LayoutItem DashboardItem="chartDashboardItem4" Weight="60.486111111111114" />
+      </LayoutGroup>
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>
